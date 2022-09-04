@@ -16,9 +16,29 @@ public class CubeMovement : MonoBehaviour
     [SerializeField]
     float negScaleFactor = 0.9f;
 
+    [SerializeField]
+    OVRInput.Controller rightController;
+
     private void Start()
     {
         zDis = Camera.main.ScreenToWorldPoint(transform.position).z + 20;
+    }
+
+    private void Update()
+    {
+        transform.position = new Vector3(GlobalTransform.Instance.transform.position.x, GlobalTransform.Instance.transform.position.y, -6.5f);
+        transform.rotation = GlobalTransform.Instance.transform.rotation;
+
+        // used to scale object when in VR
+        if (OVRInput.GetDown(OVRInput.RawButton.A, rightController))
+        {
+            transform.localScale *= posScaleFactor;
+        }
+        if (OVRInput.GetDown(OVRInput.RawButton.B, rightController))
+        {
+            print("input");
+            transform.localScale *= negScaleFactor;
+        }
     }
 
     private Vector3 GetMouseWorldPos()
@@ -27,12 +47,6 @@ public class CubeMovement : MonoBehaviour
         v.z = -10.0f;
         v = Camera.main.ScreenToWorldPoint(v);
         return Camera.main.ScreenToWorldPoint(v);
-    }
-
-    private void OnMouseDown()
-    {
-        //mousePosOffset = gameObject.transform.position - GetMouseWorldPos();
-        //zDis = Camera.main.ScreenToWorldPoint(transform.position).z;
     }
 
     private void OnMouseDrag()
@@ -52,18 +66,14 @@ public class CubeMovement : MonoBehaviour
             turn.y += Input.GetAxis("Mouse Y");
             transform.localRotation = Quaternion.Euler(turn.y, -turn.x, 0);
         }
-        // hold D and move scroll wheel to change cube size
-        if (Input.GetKey(KeyCode.D))
+        // move scroll wheel to change cube size
+        if (Input.GetAxis("Mouse ScrollWheel") > 0)
         {
-            if (Input.GetAxis("Mouse ScrollWheel") > 0)
-            {
-                transform.localScale *= posScaleFactor;
-            }
-            if (Input.GetAxis("Mouse ScrollWheel") < 0)
-            {
-                transform.localScale *= negScaleFactor;
-            }
+            transform.localScale *= posScaleFactor;
         }
-
+        if (Input.GetAxis("Mouse ScrollWheel") < 0)
+        {
+            transform.localScale *= negScaleFactor;
+        }
     }
 }

@@ -11,20 +11,19 @@ public class SpawnCube : MonoBehaviour
     [SerializeField]
     Button cubeSpawnerButton;
 
+    [SerializeField]
+    Button vrCubeSpawnerButton;
+
     public void InstantiateCube()
     {
         Instantiate(cubePrefab);
     }
 
+
     // Start is called before the first frame update
     void Start()
     {
         cubeSpawnerButton.onClick.AddListener(InstantiateCube);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        vrCubeSpawnerButton.onClick.AddListener(InstantiateCube);
     }
 }
