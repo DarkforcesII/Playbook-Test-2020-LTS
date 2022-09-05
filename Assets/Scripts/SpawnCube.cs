@@ -8,11 +8,10 @@ public class SpawnCube : MonoBehaviour
     [SerializeField]
     GameObject cubePrefab;
 
+    // references vr button by default
+    // reference mouse button for mouse and keyboard controls
     [SerializeField]
     Button cubeSpawnerButton;
-
-    [SerializeField]
-    Button vrCubeSpawnerButton;
 
     public void InstantiateCube()
     {
@@ -24,6 +23,5 @@ public class SpawnCube : MonoBehaviour
     void Start()
     {
         cubeSpawnerButton.onClick.AddListener(InstantiateCube);
-        vrCubeSpawnerButton.onClick.AddListener(InstantiateCube);
     }
 }

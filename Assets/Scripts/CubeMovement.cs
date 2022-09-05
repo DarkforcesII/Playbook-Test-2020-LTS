@@ -19,15 +19,23 @@ public class CubeMovement : MonoBehaviour
     [SerializeField]
     OVRInput.Controller rightController;
 
+    [SerializeField]
+    bool headsetOn;
+
     private void Start()
     {
         zDis = Camera.main.ScreenToWorldPoint(transform.position).z + 20;
+        headsetOn = true;
     }
 
     private void Update()
     {
-        transform.position = new Vector3(GlobalTransform.Instance.transform.position.x, GlobalTransform.Instance.transform.position.y, -6.5f);
-        transform.rotation = GlobalTransform.Instance.transform.rotation;
+        // toggle bool in editor if you want to use mouse and keyboard
+        if (headsetOn == true)
+        {
+            transform.position = new Vector3(GlobalTransform.Instance.transform.position.x, GlobalTransform.Instance.transform.position.y, -6.5f);
+            transform.rotation = GlobalTransform.Instance.transform.rotation;
+        }
 
         // used to scale object when in VR
         if (OVRInput.GetDown(OVRInput.RawButton.A, rightController))
