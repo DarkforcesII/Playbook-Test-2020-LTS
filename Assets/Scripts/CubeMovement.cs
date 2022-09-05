@@ -20,18 +20,17 @@ public class CubeMovement : MonoBehaviour
     OVRInput.Controller rightController;
 
     [SerializeField]
-    bool headsetOn;
+    bool isHeadsetOff;
 
     private void Start()
     {
         zDis = Camera.main.ScreenToWorldPoint(transform.position).z + 20;
-        headsetOn = true;
     }
 
     private void Update()
     {
         // toggle bool in editor if you want to use mouse and keyboard
-        if (headsetOn == true)
+        if (isHeadsetOff == false)
         {
             transform.position = new Vector3(GlobalTransform.Instance.transform.position.x, GlobalTransform.Instance.transform.position.y, -6.5f);
             transform.rotation = GlobalTransform.Instance.transform.rotation;
