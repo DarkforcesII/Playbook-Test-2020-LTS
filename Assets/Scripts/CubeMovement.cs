@@ -17,9 +17,6 @@ public class CubeMovement : MonoBehaviour
     float negScaleFactor = 0.9f;
 
     [SerializeField]
-    OVRInput.Controller rightController;
-
-    [SerializeField]
     bool isHeadsetOff;
 
     private void Start()
@@ -34,17 +31,6 @@ public class CubeMovement : MonoBehaviour
         {
             transform.position = new Vector3(GlobalTransform.Instance.transform.position.x, GlobalTransform.Instance.transform.position.y, -6.5f);
             transform.rotation = GlobalTransform.Instance.transform.rotation;
-        }
-
-        // used to scale object when in VR
-        if (OVRInput.GetDown(OVRInput.RawButton.A, rightController))
-        {
-            transform.localScale *= posScaleFactor;
-        }
-        if (OVRInput.GetDown(OVRInput.RawButton.B, rightController))
-        {
-            print("input");
-            transform.localScale *= negScaleFactor;
         }
     }
 
